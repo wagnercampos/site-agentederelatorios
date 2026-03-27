@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="robots" content="noindex, nofollow">
 <title>MOA.labs — Gerador de Relatórios</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -40,42 +41,48 @@
   }
 
   header {
-    padding: 2.5rem 3rem 2rem;
+    padding: 2rem 3rem;
     border-bottom: 1px solid #1f1f1f;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .header-left {
     display: flex;
     align-items: center;
     gap: 1.5rem;
   }
 
-  .logo {
-    height: 44px;
-    /* logo vai aqui via JS */
-  }
-
   .logo-text {
     display: flex;
-    flex-direction: column;
+    align-items: baseline;
     gap: 0;
+    line-height: 1;
   }
 
   .logo-moa {
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 28px;
-    letter-spacing: .04em;
-    color: #fff;
+    font-size: 32px;
+    letter-spacing: .02em;
+    color: #f0ede8;
     line-height: 1;
   }
 
-  .logo-moa span {
+  .logo-dot {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
     color: var(--laranja);
+    line-height: 1;
   }
 
-  .logo-sub {
-    font-size: 11px;
+  .logo-labs {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 18px;
     font-weight: 300;
-    color: var(--texto2);
-    letter-spacing: .12em;
-    text-transform: uppercase;
+    color: #f0ede8;
+    letter-spacing: .18em;
+    line-height: 1;
   }
 
   .divider {
@@ -332,6 +339,36 @@
 
   .btn-download:hover { opacity: .9; }
 
+  .field-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .field-label {
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--texto2);
+    text-transform: uppercase;
+    letter-spacing: .1em;
+  }
+
+  .field-input {
+    width: 100%;
+    background: #222;
+    border: 1.5px solid #333;
+    border-radius: 10px;
+    padding: 12px 16px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    color: var(--texto);
+    outline: none;
+    transition: border-color .2s;
+  }
+
+  .field-input::placeholder { color: #444; }
+  .field-input:focus { border-color: var(--laranja); }
+
   .dots {
     display: flex;
     gap: 5px;
@@ -363,12 +400,12 @@
 <body>
 
 <header>
-  <div class="logo-text">
-    <div class="logo-moa">MOA<span>.</span>labs</div>
-    <div class="logo-sub">Agência Digital</div>
+  <div class="header-left">
+    <div class="header-title">Gerador de Relatórios</div>
   </div>
-  <div class="divider"></div>
-  <div class="header-title">Gerador de Relatórios</div>
+  <div class="logo-text">
+    <span class="logo-moa">MOA</span><span class="logo-dot">.</span><span class="logo-labs">labs</span>
+  </div>
 </header>
 
 <main>
@@ -384,6 +421,11 @@
     </div>
 
     <div class="card-body">
+
+      <div class="field-group">
+        <label class="field-label" for="nomeCliente">Nome do cliente</label>
+        <input type="text" class="field-input" id="nomeCliente" placeholder="Ex: Empresa XYZ">
+      </div>
 
       <div class="drop-zone" id="dropZone">
         <input type="file" id="fileInput" accept=".pdf,.png,.jpg,.jpeg,.xlsx,.xls,.csv">
