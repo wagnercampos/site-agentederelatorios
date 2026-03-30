@@ -14,7 +14,6 @@
     }
     body { font-family: 'Space Mono', monospace; background: var(--bg); color: var(--dark); min-height: 100vh; }
 
-    /* ── HEADER ── */
     header {
       background: var(--dark);
       padding: 0 40px;
@@ -34,10 +33,9 @@
       color: #888;
     }
 
-    /* ── MAIN ── */
     .container {
-      max-width: 760px;
-      margin: 48px auto;
+      max-width: 680px;
+      margin: 56px auto;
       padding: 0 24px 80px;
     }
     .page-title {
@@ -54,40 +52,29 @@
       letter-spacing: 1px;
     }
 
-    /* ── SECTIONS ── */
     .form-section {
       background: #fff;
       border: 1.5px solid var(--border);
       border-radius: 4px;
       padding: 28px 28px 24px;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
     .form-section-title {
       font-family: 'Anton', sans-serif;
-      font-size: 12px;
+      font-size: 11px;
       text-transform: uppercase;
       letter-spacing: 2px;
-      color: #aaa;
+      color: #bbb;
       margin-bottom: 20px;
       padding-bottom: 10px;
       border-bottom: 1px solid var(--border);
     }
 
-    /* ── GRID ── */
     .field-row { display: grid; gap: 16px; margin-bottom: 16px; }
     .field-row.cols-2 { grid-template-columns: 1fr 1fr; }
-    .field-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
     .field-row:last-child { margin-bottom: 0; }
-
-    /* ── FIELDS ── */
     .field-group { display: flex; flex-direction: column; gap: 6px; }
-    .field-label {
-      font-size: 10px;
-      text-transform: uppercase;
-      letter-spacing: 1px;
-      color: #999;
-      font-weight: 700;
-    }
+    .field-label { font-size: 10px; text-transform: uppercase; letter-spacing: 1px; color: #999; font-weight: 700; }
     .field-input {
       width: 100%;
       padding: 10px 12px;
@@ -103,23 +90,75 @@
     .field-input:focus { border-color: var(--teal); background: #fff; }
     .field-input::placeholder { color: #bbb; }
 
-    /* ── TOP POSTS ── */
-    .post-block {
+    /* ── UPLOAD AREA ── */
+    .upload-area {
+      border: 2px dashed var(--border);
+      border-radius: 4px;
+      padding: 40px 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.2s, background 0.2s;
+      position: relative;
+    }
+    .upload-area:hover, .upload-area.drag-over {
+      border-color: var(--teal);
+      background: #f0fdfd;
+    }
+    .upload-area input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .upload-icon { font-size: 32px; margin-bottom: 12px; }
+    .upload-title {
+      font-family: 'Anton', sans-serif;
+      font-size: 15px;
+      letter-spacing: 1px;
+      color: var(--dark);
+      margin-bottom: 6px;
+    }
+    .upload-sub { font-size: 11px; color: #aaa; line-height: 1.6; }
+    .upload-sub strong { color: var(--teal); }
+
+    /* ── FILE LIST ── */
+    .file-list { margin-top: 16px; display: flex; flex-direction: column; gap: 8px; }
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: #f7f7f5;
       border: 1.5px solid var(--border);
       border-radius: 3px;
-      padding: 16px 16px 12px;
-      margin-bottom: 12px;
-      background: var(--bg);
+      padding: 10px 14px;
     }
-    .post-block:last-child { margin-bottom: 0; }
-    .post-block-title {
-      font-family: 'Anton', sans-serif;
-      font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.5px;
-      color: var(--teal);
-      margin-bottom: 12px;
+    .file-icon { font-size: 16px; flex-shrink: 0; }
+    .file-name { font-size: 12px; color: var(--dark); flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    .file-size { font-size: 10px; color: #aaa; flex-shrink: 0; }
+    .file-remove {
+      background: none;
+      border: none;
+      cursor: pointer;
+      color: #ccc;
+      font-size: 14px;
+      padding: 2px 4px;
+      flex-shrink: 0;
     }
+    .file-remove:hover { color: var(--orange); }
+
+    /* ── HINT ── */
+    .hint-box {
+      background: #f7f7f5;
+      border: 1.5px solid var(--border);
+      border-left: 3px solid var(--teal);
+      border-radius: 4px;
+      padding: 14px 18px;
+      margin-bottom: 16px;
+    }
+    .hint-box p { font-size: 11px; color: #888; line-height: 1.8; }
+    .hint-box strong { color: var(--dark); }
 
     /* ── SUBMIT ── */
     .btn-gerar {
@@ -134,18 +173,17 @@
       letter-spacing: 2px;
       text-transform: uppercase;
       cursor: pointer;
-      margin-top: 8px;
       transition: background 0.15s;
     }
     .btn-gerar:hover { background: #2a2a2a; }
-    .btn-gerar:disabled { background: #888; cursor: not-allowed; }
+    .btn-gerar:disabled { background: #999; cursor: not-allowed; }
 
     /* ── LOADING ── */
     .loading-overlay {
       display: none;
       position: fixed;
       inset: 0;
-      background: rgba(27,27,27,0.88);
+      background: rgba(27,27,27,0.9);
       z-index: 100;
       flex-direction: column;
       align-items: center;
@@ -154,27 +192,23 @@
     }
     .loading-overlay.active { display: flex; }
     .spinner {
-      width: 40px; height: 40px;
-      border: 3px solid #333;
+      width: 44px; height: 44px;
+      border: 3px solid #2a2a2a;
       border-top-color: var(--teal);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-text {
-      font-family: 'Anton', sans-serif;
-      font-size: 14px;
-      letter-spacing: 2px;
-      text-transform: uppercase;
-      color: #888;
-    }
+    .loading-text { font-family: 'Anton', sans-serif; font-size: 14px; letter-spacing: 2px; text-transform: uppercase; color: #666; }
+    .loading-sub { font-size: 11px; color: #444; text-align: center; max-width: 300px; line-height: 1.6; }
   </style>
 </head>
 <body>
 
   <div class="loading-overlay" id="loadingOverlay">
     <div class="spinner"></div>
-    <div class="loading-text">Gerando relatório com IA...</div>
+    <div class="loading-text">Analisando dados com IA...</div>
+    <div class="loading-sub">O Claude está lendo os arquivos e gerando o relatório. Isso pode levar alguns segundos.</div>
   </div>
 
   <header>
@@ -185,228 +219,139 @@
 
   <div class="container">
     <div class="page-title">Novo Relatório</div>
-    <div class="page-sub">Preencha os dados do cliente e as métricas do período</div>
+    <div class="page-sub">Instagram · Análise com Inteligência Artificial</div>
 
-    <form id="reportForm">
+    <div class="hint-box">
+      <p>
+        Suba os <strong>prints do Instagram Insights</strong>, uma <strong>planilha CSV/XLSX</strong> exportada do Meta Business Suite ou um <strong>PDF</strong> com os dados do período.
+        A IA vai extrair as métricas automaticamente e gerar o relatório completo.
+      </p>
+    </div>
 
-      <!-- DADOS DO CLIENTE -->
+    <form id="reportForm" enctype="multipart/form-data">
+
+      <!-- IDENTIFICAÇÃO -->
       <div class="form-section">
-        <div class="form-section-title">Dados do Cliente</div>
+        <div class="form-section-title">Identificação do Cliente</div>
         <div class="field-row cols-2">
           <div class="field-group">
             <label class="field-label" for="nomeCliente">Nome do cliente</label>
-            <input type="text" class="field-input" id="nomeCliente" placeholder="Ex: Bella Moda Boutique" required>
+            <input type="text" class="field-input" id="nomeCliente" name="cliente" placeholder="Ex: Bella Moda Boutique" required>
           </div>
           <div class="field-group">
             <label class="field-label" for="handle">Instagram</label>
-            <input type="text" class="field-input" id="handle" placeholder="@cliente" required>
+            <input type="text" class="field-input" id="handle" name="handle" placeholder="@cliente" required>
           </div>
         </div>
         <div class="field-row cols-2">
           <div class="field-group">
             <label class="field-label" for="segmento">Segmento / Nicho</label>
-            <input type="text" class="field-input" id="segmento" placeholder="Ex: Moda Feminina">
+            <input type="text" class="field-input" id="segmento" name="segmento" placeholder="Ex: Moda Feminina">
           </div>
           <div class="field-group">
             <label class="field-label" for="periodo">Período</label>
-            <input type="text" class="field-input" id="periodo" placeholder="Ex: Março de 2026" required>
+            <input type="text" class="field-input" id="periodo" name="periodo" placeholder="Ex: Março de 2026" required>
           </div>
         </div>
       </div>
 
-      <!-- MÉTRICAS -->
+      <!-- UPLOAD -->
       <div class="form-section">
-        <div class="form-section-title">Métricas do Período</div>
-        <div class="field-row cols-3">
-          <div class="field-group">
-            <label class="field-label" for="seguidores">Seguidores (total)</label>
-            <input type="text" class="field-input" id="seguidores" placeholder="Ex: 12.847" required>
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="seg_var">Novos seguidores</label>
-            <input type="text" class="field-input" id="seg_var" placeholder="Ex: +342">
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="seg_pct">Variação %</label>
-            <input type="text" class="field-input" id="seg_pct" placeholder="Ex: +2,7%">
-          </div>
-        </div>
-        <div class="field-row cols-2">
-          <div class="field-group">
-            <label class="field-label" for="alcance">Alcance total</label>
-            <input type="text" class="field-input" id="alcance" placeholder="Ex: 48.320">
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="impressoes">Impressões</label>
-            <input type="text" class="field-input" id="impressoes" placeholder="Ex: 76.540">
-          </div>
-        </div>
-        <div class="field-row cols-3">
-          <div class="field-group">
-            <label class="field-label" for="engajamento">Engajamento médio</label>
-            <input type="text" class="field-input" id="engajamento" placeholder="Ex: 4,2%">
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="posts">Posts publicados</label>
-            <input type="text" class="field-input" id="posts" placeholder="Ex: 18">
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="visitas">Visitas ao perfil</label>
-            <input type="text" class="field-input" id="visitas" placeholder="Ex: 2.156">
-          </div>
-        </div>
-        <div class="field-row cols-2">
-          <div class="field-group">
-            <label class="field-label" for="cliques">Cliques no link</label>
-            <input type="text" class="field-input" id="cliques" placeholder="Ex: 387">
-          </div>
-          <div class="field-group">
-            <label class="field-label" for="stories">Views de Stories</label>
-            <input type="text" class="field-input" id="stories" placeholder="Ex: 18.430">
-          </div>
-        </div>
-      </div>
+        <div class="form-section-title">Dados do período</div>
 
-      <!-- TOP POSTS -->
-      <div class="form-section">
-        <div class="form-section-title">Top 3 Posts do Período</div>
-
-        <div class="post-block">
-          <div class="post-block-title">Post 1</div>
-          <div class="field-row cols-2">
-            <div class="field-group">
-              <label class="field-label">Legenda / Título</label>
-              <input type="text" class="field-input p-caption" placeholder="Ex: Look verão completo 🌸">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Tipo</label>
-              <input type="text" class="field-input p-tipo" placeholder="Ex: Carrossel, Reels, Foto">
-            </div>
-          </div>
-          <div class="field-row cols-3">
-            <div class="field-group">
-              <label class="field-label">Curtidas</label>
-              <input type="text" class="field-input p-curtidas" placeholder="Ex: 1.247">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Comentários</label>
-              <input type="text" class="field-input p-comentarios" placeholder="Ex: 89">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Engajamento</label>
-              <input type="text" class="field-input p-engajamento" placeholder="Ex: 6,1%">
-            </div>
+        <div class="upload-area" id="uploadArea">
+          <input type="file" id="fileInput" name="arquivos[]" multiple
+                 accept="image/*,.pdf,.csv,.xlsx,.xls">
+          <div class="upload-icon">📂</div>
+          <div class="upload-title">Arraste os arquivos aqui</div>
+          <div class="upload-sub">
+            ou clique para selecionar<br>
+            <strong>Prints PNG/JPG</strong> · <strong>PDF</strong> · <strong>CSV / XLSX</strong><br>
+            Pode enviar múltiplos arquivos de uma vez
           </div>
         </div>
 
-        <div class="post-block">
-          <div class="post-block-title">Post 2</div>
-          <div class="field-row cols-2">
-            <div class="field-group">
-              <label class="field-label">Legenda / Título</label>
-              <input type="text" class="field-input p-caption" placeholder="Ex: Nova coleção chegou!">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Tipo</label>
-              <input type="text" class="field-input p-tipo" placeholder="Ex: Reels">
-            </div>
-          </div>
-          <div class="field-row cols-3">
-            <div class="field-group">
-              <label class="field-label">Curtidas</label>
-              <input type="text" class="field-input p-curtidas" placeholder="Ex: 1.103">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Comentários</label>
-              <input type="text" class="field-input p-comentarios" placeholder="Ex: 52">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Engajamento</label>
-              <input type="text" class="field-input p-engajamento" placeholder="Ex: 5,7%">
-            </div>
-          </div>
-        </div>
-
-        <div class="post-block">
-          <div class="post-block-title">Post 3</div>
-          <div class="field-row cols-2">
-            <div class="field-group">
-              <label class="field-label">Legenda / Título</label>
-              <input type="text" class="field-input p-caption" placeholder="Ex: Promoção relâmpago 48h">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Tipo</label>
-              <input type="text" class="field-input p-tipo" placeholder="Ex: Foto">
-            </div>
-          </div>
-          <div class="field-row cols-3">
-            <div class="field-group">
-              <label class="field-label">Curtidas</label>
-              <input type="text" class="field-input p-curtidas" placeholder="Ex: 987">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Comentários</label>
-              <input type="text" class="field-input p-comentarios" placeholder="Ex: 143">
-            </div>
-            <div class="field-group">
-              <label class="field-label">Engajamento</label>
-              <input type="text" class="field-input p-engajamento" placeholder="Ex: 5,2%">
-            </div>
-          </div>
-        </div>
+        <div class="file-list" id="fileList"></div>
       </div>
 
       <button type="submit" class="btn-gerar" id="btnGerar">Gerar Relatório com IA</button>
-
     </form>
   </div>
 
   <script>
-    const form    = document.getElementById('reportForm');
-    const btn     = document.getElementById('btnGerar');
-    const overlay = document.getElementById('loadingOverlay');
+    const fileInput  = document.getElementById('fileInput');
+    const fileList   = document.getElementById('fileList');
+    const uploadArea = document.getElementById('uploadArea');
+    const btn        = document.getElementById('btnGerar');
+    const overlay    = document.getElementById('loadingOverlay');
+    let selectedFiles = [];
 
-    form.addEventListener('submit', async (e) => {
+    const icons = { image: '🖼️', pdf: '📄', csv: '📊', xlsx: '📊', xls: '📊', default: '📎' };
+    function getIcon(name) {
+      const ext = name.split('.').pop().toLowerCase();
+      if (['jpg','jpeg','png','gif','webp'].includes(ext)) return icons.image;
+      return icons[ext] || icons.default;
+    }
+    function fmtSize(bytes) {
+      if (bytes < 1024) return bytes + ' B';
+      if (bytes < 1048576) return (bytes/1024).toFixed(0) + ' KB';
+      return (bytes/1048576).toFixed(1) + ' MB';
+    }
+    function renderFiles() {
+      fileList.innerHTML = '';
+      selectedFiles.forEach((f, i) => {
+        const div = document.createElement('div');
+        div.className = 'file-item';
+        div.innerHTML = `
+          <span class="file-icon">${getIcon(f.name)}</span>
+          <span class="file-name">${f.name}</span>
+          <span class="file-size">${fmtSize(f.size)}</span>
+          <button type="button" class="file-remove" data-i="${i}">✕</button>`;
+        fileList.appendChild(div);
+      });
+      fileList.querySelectorAll('.file-remove').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectedFiles.splice(parseInt(btn.dataset.i), 1);
+          renderFiles();
+        });
+      });
+    }
+
+    fileInput.addEventListener('change', () => {
+      selectedFiles = [...selectedFiles, ...Array.from(fileInput.files)];
+      fileInput.value = '';
+      renderFiles();
+    });
+
+    uploadArea.addEventListener('dragover', e => { e.preventDefault(); uploadArea.classList.add('drag-over'); });
+    uploadArea.addEventListener('dragleave', () => uploadArea.classList.remove('drag-over'));
+    uploadArea.addEventListener('drop', e => {
       e.preventDefault();
+      uploadArea.classList.remove('drag-over');
+      selectedFiles = [...selectedFiles, ...Array.from(e.dataTransfer.files)];
+      renderFiles();
+    });
+
+    document.getElementById('reportForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      if (selectedFiles.length === 0) {
+        alert('Adicione pelo menos um arquivo com os dados do período.');
+        return;
+      }
+
       btn.disabled = true;
       overlay.classList.add('active');
 
-      const postBlocks = document.querySelectorAll('.post-block');
-      const topPosts = Array.from(postBlocks).map(block => ({
-        caption:     block.querySelector('.p-caption').value,
-        tipo:        block.querySelector('.p-tipo').value,
-        curtidas:    block.querySelector('.p-curtidas').value,
-        comentarios: block.querySelector('.p-comentarios').value,
-        engajamento: block.querySelector('.p-engajamento').value,
-      })).filter(p => p.caption.trim() !== '');
-
-      const payload = {
-        cliente:     document.getElementById('nomeCliente').value,
-        handle:      document.getElementById('handle').value,
-        segmento:    document.getElementById('segmento').value,
-        periodo:     document.getElementById('periodo').value,
-        seguidores:  document.getElementById('seguidores').value,
-        seg_var:     document.getElementById('seg_var').value,
-        seg_pct:     document.getElementById('seg_pct').value,
-        alcance:     document.getElementById('alcance').value,
-        impressoes:  document.getElementById('impressoes').value,
-        engajamento: document.getElementById('engajamento').value,
-        posts:       document.getElementById('posts').value,
-        visitas:     document.getElementById('visitas').value,
-        cliques:     document.getElementById('cliques').value,
-        stories:     document.getElementById('stories').value,
-        top_posts:   topPosts,
-      };
+      const fd = new FormData();
+      fd.append('cliente', document.getElementById('nomeCliente').value);
+      fd.append('handle',  document.getElementById('handle').value);
+      fd.append('segmento', document.getElementById('segmento').value);
+      fd.append('periodo',  document.getElementById('periodo').value);
+      selectedFiles.forEach(f => fd.append('arquivos[]', f));
 
       try {
-        const res = await fetch('gerar-relatorio.php', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-
+        const res = await fetch('gerar-relatorio.php', { method: 'POST', body: fd });
         if (!res.ok) throw new Error(await res.text());
-
         const html = await res.text();
         const win = window.open('', '_blank');
         win.document.open();
